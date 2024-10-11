@@ -1,13 +1,12 @@
 ﻿{
   "id": "vendily.bitedemcentipedes",
   "name": "Bite Dem Centipedes",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "authors": "Vendily",
-  "target_game_version": "v1.9",
+  "target_game_version": "v1.9.15b",
   "description": "Lets you bite the heads off baby centipedes to kill them even when full.",
   "tags": ["Game Mechanics"],
   "requirements": [],
   "requirements_names": [],
   "priorities": ["rwremix","moreslugcats"]
-  "checksum_override_version": true
 }
