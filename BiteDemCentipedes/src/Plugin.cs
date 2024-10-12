@@ -72,12 +72,15 @@ sealed class Plugin : BaseUnityPlugin
                     }
                 } else if (ModManager.MSC && self.SlugCatClass == MoreSlugcatsEnums.SlugcatStatsName.Spear)
                 {
-                    /*
                     PlayerGraphics.TailSpeckles tailSpecks2 = (self.graphicsModule as PlayerGraphics).tailSpecks;
                     Logger.LogInfo(PLUGIN_NAME + ": Spear Progress =" + tailSpecks2.spearProg);
+                    // needs to beat the hooked method to this mechanic, so we speed it up
+                    if (tailSpecks2.spearProg >= 0.1f)
+                        tailSpecks2.setSpearProgress(Mathf.Lerp(tailSpecks2.spearProg, 1f, 0.05f));
                     if (tailSpecks2.spearProg > 0.95f)
                     {
                         tailSpecks2.setSpearProgress(1f);
+                        Logger.LogInfo(PLUGIN_NAME + ": Spear Progress set to " + tailSpecks2.spearProg);
                     }
                     if (tailSpecks2.spearProg == 1f)
                     {
@@ -128,13 +131,13 @@ sealed class Plugin : BaseUnityPlugin
                         weapon.forbiddenToPlayer = 40;
                         (result.obj as Creature).SetKillTag(self.abstractCreature);
                         weapon.room.socialEventRecognizer.WeaponAttack(weapon as Spear, weapon.thrownBy, result.obj as Creature, true);
-                        if (self.FoodInStomach < self.MaxFoodInStomach)
-                            self.AddFood(1);
                         creature.Die();
                         (abstractSpear.realizedObject as Spear).Spear_NeedleDisconnect();
+                        Logger.LogInfo(PLUGIN_NAME + ": Lodging spear into centipede");
                         (abstractSpear.realizedObject as Spear).LodgeInCreature(result, eu);
+                        Logger.LogInfo(PLUGIN_NAME + ": Lodging succeeded?: " + (abstractSpear.realizedObject as Spear).stuckInObject != null);
                         weapon.thrownBy = null;
-                    }*/
+                    }
                 } else if (self.FoodInStomach >= self.MaxFoodInStomach && self.eatCounter < 1)
                 {
                     self.eatCounter = 15;
