@@ -1,0 +1,9 @@
+﻿{
+  "id": "vendily.deathplayerghosts",
+  "name": "Deaths are Player Ghosts",
+  "version": "1.0.0",
+  "authors": "Vendily",
+  "target_game_version": "v1.9.15b",
+  "description": "Gives you full control over the ideal player ghost count in the ending.<LINE>Intended to make the ghost count equal to the death count on the save.<LINE>And then I got hit with scope creep.",
+  "tags": ["Game Mechanics"]
+}
