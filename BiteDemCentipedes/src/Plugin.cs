@@ -16,7 +16,7 @@ sealed class Plugin : BaseUnityPlugin
 {
     private const string PLUGIN_GUID = "vendily.bitedemcentipedes";
     private const string PLUGIN_NAME = "Bite Dem Centipedes";
-    private const string PLUGIN_VERSION = "1.1.0";
+    private const string PLUGIN_VERSION = "1.2.0";
     bool init;
 
     public void OnEnable()
@@ -73,18 +73,18 @@ sealed class Plugin : BaseUnityPlugin
                 } else if (ModManager.MSC && self.SlugCatClass == MoreSlugcatsEnums.SlugcatStatsName.Spear)
                 {
                     PlayerGraphics.TailSpeckles tailSpecks2 = (self.graphicsModule as PlayerGraphics).tailSpecks;
-                    Logger.LogInfo(PLUGIN_NAME + ": Spear Progress =" + tailSpecks2.spearProg);
+                    //Logger.LogInfo("Spear Progress =" + tailSpecks2.spearProg);
                     // needs to beat the hooked method to this mechanic, so we speed it up
                     if (tailSpecks2.spearProg >= 0.1f)
                         tailSpecks2.setSpearProgress(Mathf.Lerp(tailSpecks2.spearProg, 1f, 0.05f));
                     if (tailSpecks2.spearProg > 0.95f)
                     {
                         tailSpecks2.setSpearProgress(1f);
-                        Logger.LogInfo(PLUGIN_NAME + ": Spear Progress set to " + tailSpecks2.spearProg);
+                        //Logger.LogInfo("Spear Progress set to " + tailSpecks2.spearProg);
                     }
                     if (tailSpecks2.spearProg == 1f)
                     {
-                        Logger.LogInfo(PLUGIN_NAME + ": Creating Spear");
+                        Logger.LogInfo("Creating Spear");
                         self.room.PlaySound(MoreSlugcatsEnums.MSCSoundID.SM_Spear_Grab, 0f, 1f, 0.5f + UnityEngine.Random.value * 1.5f);
                         self.smSpearSoundReady = false;
                         Vector2 pos = (self.graphicsModule as PlayerGraphics).tail[(int)((float)(self.graphicsModule as PlayerGraphics).tail.Length / 2f)].pos;
@@ -126,17 +126,15 @@ sealed class Plugin : BaseUnityPlugin
                         (abstractSpear.realizedObject as Spear).thrownBy = self;
                         Weapon weapon = (abstractSpear.realizedObject as Weapon);
                         Creature creature = (self.grasps[active_grasp_index].grabbed as Creature);
-                        SharedPhysics.CollisionResult result = new((creature as Centipede), (creature as Centipede).HeadChunk, null, true, (creature as Centipede).HeadChunk.pos);
+                        SharedPhysics.CollisionResult result = new SharedPhysics.CollisionResult();
+                        result.obj = creature;
+                        //Logger.LogDebug("Hitting with spear");
                         (abstractSpear.realizedObject as Spear).HitSomething(result, eu);
                         weapon.forbiddenToPlayer = 40;
                         (result.obj as Creature).SetKillTag(self.abstractCreature);
-                        weapon.room.socialEventRecognizer.WeaponAttack(weapon as Spear, weapon.thrownBy, result.obj as Creature, true);
                         creature.Die();
                         (abstractSpear.realizedObject as Spear).Spear_NeedleDisconnect();
-                        Logger.LogInfo(PLUGIN_NAME + ": Lodging spear into centipede");
-                        (abstractSpear.realizedObject as Spear).LodgeInCreature(result, eu);
-                        Logger.LogInfo(PLUGIN_NAME + ": Lodging succeeded?: " + (abstractSpear.realizedObject as Spear).stuckInObject != null);
-                        weapon.thrownBy = null;
+                        //Logger.LogDebug("Needle Disconnected");
                     }
                 } else if (self.FoodInStomach >= self.MaxFoodInStomach && self.eatCounter < 1)
                 {

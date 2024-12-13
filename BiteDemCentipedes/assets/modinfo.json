@@ -1,10 +1,10 @@
 ﻿{
   "id": "vendily.bitedemcentipedes",
   "name": "Bite Dem Centipedes",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "authors": "Vendily",
   "target_game_version": "v1.9.15b",
-  "description": "Lets you bite the heads off baby centipedes to kill them even when full.",
+  "description": "Lets you bite the heads off baby centipedes to kill them even when full.<LINE>Works for all base game and DLC slugcats except Saint without Ascension, doesn't impact Artificer's Maul or Gourmand's crafting ability.",
   "tags": ["Game Mechanics"],
   "requirements": [],
   "requirements_names": [],
